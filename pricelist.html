@@ -1,0 +1,581 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESELLER WIDDZYY | pricelist</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #F0F4F3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .header {
+            width: 100%;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-color: #27e7ec;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: black;
+            background-color: #27e7ec;
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+        .back-button {
+            position: absolute;
+            left: 10px;
+            background-color: #27e7ec;
+            color: black;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .back-button i {
+            margin-right: 5px;
+        }
+        .back-button:hover {
+            background-color: #1fc1c4;
+        }
+        .search-container {
+            width: 80%;
+            max-width: 400px;
+            margin-top: 20px;
+            position: relative;
+        }
+        .search-container input {
+            width: 100%;
+            padding: 10px 40px 10px 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        .search-container .fa-search {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ccc;
+            cursor: pointer;
+        }
+        .search-results {
+            position: absolute;
+            top: 40px;
+            width: 100%;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+        .search-results div {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .search-results div:hover {
+            background-color: #f0f0f0;
+        }
+        .menu, .submenu, .subsubmenu {
+            width: 80%;
+            max-width: 400px;
+            margin-top: 20px;
+            overflow-y: auto;
+        }
+        .menu-item, .submenu-item, .subsubmenu-item {
+            background-color: #27e7ec;
+            color: black;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            position: relative;
+        }
+        .menu-item:hover, .submenu-item:hover, .subsubmenu-item:hover {
+            background-color: #1fc1c4;
+        }
+        .menu-item i, .submenu-item i, .subsubmenu-item i {
+            font-size: 16px;
+            transition: transform 0.3s;
+        }
+        .menu-item.active i, .submenu-item.active i {
+            transform: rotate(180deg);
+        }
+        .footer {
+            width: 100%;
+            background-color: #27e7ec;
+            padding: 20px 0;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+            position: absolute;
+            bottom: 0;
+        }
+        .submenu, .subsubmenu {
+            display: none;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            max-height: 0;
+            opacity: 0;
+        }
+        .submenu.show, .subsubmenu.show {
+            display: block;
+            max-height: 500px; /* Adjust as needed */
+            opacity: 1;
+        }
+        .submenu-content, .subsubmenu-content {
+            max-height: 200px; /* Adjust as needed */
+            overflow-y: auto;
+            border-left: 2px solid #1fc1c4;
+            padding-left: 10px;
+        }
+        .subsubmenu-content {
+            border-left: 2px solid #1fc1c4;
+            padding-left: 10px;
+        }
+        .highlight {
+            animation: highlight 2s;
+        }
+        @keyframes highlight {
+            0% { background-color: yellow; }
+            100% { background-color: #27e7ec; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        .swal2-popup {
+            border-radius: 15px !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button class="back-button" onclick="goToPage()">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <h1>PRICELIST</h1>
+    </div>
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search...">
+        <i class="fas fa-search" onclick="performSearch()"></i>
+        <div id="search-results" class="search-results"></div>
+    </div>
+    <div class="menu">
+        <div class="menu-item" onclick="toggleSubMenu('premium-submenu', this)">
+            APLIKASI PREMIUM
+            <i class="fas fa-eye-slash"></i>
+        </div>
+        <div id="premium-submenu" class="submenu">
+            <div class="submenu-content">
+                <div class="submenu-item" onclick="toggleSubMenu('streaming-submenu', this)">
+                    Streaming App
+                    <i class="fas fa-eye-slash"></i>
+                </div>
+                <div id="streaming-submenu" class="subsubmenu">
+                    <div class="subsubmenu-content">
+                        <div class="subsubmenu-item" onclick="showAlert('Netflix')">Netflix</div>
+                        <div class="subsubmenu-item" onclick="showAlert('Disney')">Disney</div>
+                        <div class="subsubmenu-item" onclick="showAlert('bstation')">Bstation</div>
+                        <div class="subsubmenu-item" onclick="showAlert('vidio')">vidio</div>
+                        <div class="subsubmenu-item" onclick="showAlert('primevidio')">prime vidio</div>
+                        <div class="subsubmenu-item" onclick="showAlert('youtube')">youtube</div>
+                        <div class="subsubmenu-item" onclick="showAlert('wetv')">wetv</div>
+                        <div class="subsubmenu-item" onclick="showAlert('viu')">viu</div>
+                        <div class="subsubmenu-item" onclick="showAlert('loklok')">loklok</div>
+                        <div class="subsubmenu-item" onclick="showAlert('youku')">youku</div>
+                        <div class="subsubmenu-item" onclick="showAlert('vision')">vision</div>
+                        <div class="subsubmenu-item" onclick="showAlert('iqiyi')">iqiyi</div>
+                        
+                    </div>
+                </div>
+                <div class="submenu-item" onclick="toggleSubMenu('editing-submenu', this)">
+                    Editing App
+                    <i class="fas fa-eye-slash"></i>
+                </div>
+                <div id="editing-submenu" class="subsubmenu">
+                    <div class="subsubmenu-content">
+                        <div class="subsubmenu-item" onclick="showAlert('capcut')">capcut</div>
+                        <div class="subsubmenu-item" onclick="showAlert('alightmotion')">alight motion</div>
+                        <div class="subsubmenu-item" onclick="showAlert('canva')">canva</div>
+                        <div class="subsubmenu-item" onclick="showAlert('dazzcam')">dazzcam</div>
+                        <div class="subsubmenu-item" onclick="showAlert('oldroll')">oldroll</div>
+                        <div class="subsubmenu-item" onclick="showAlert('remini')">remini</div>
+                        <div class="subsubmenu-item" onclick="showAlert('lightroom')">lightroom</div>
+                        <div class="subsubmenu-item" onclick="showAlert('meitu')">meitu</div>
+                        <div class="subsubmenu-item" onclick="showAlert('vsco')">vsco</div>
+                        <div class="subsubmenu-item" onclick="showAlert('polarr')">polarr</div>
+                        <div class="subsubmenu-item" onclick="showAlert('ibispaint')">ibis paint</div>
+                    </div>
+                </div>
+                <div class="submenu-item" onclick="toggleSubMenu('other-submenu', this)">
+                    Other App
+                    <i class="fas fa-eye-slash"></i>
+                </div>
+                <div id="other-submenu" class="subsubmenu">
+                    <div class="subsubmenu-content">
+                        <div class="subsubmenu-item" onclick="showAlert('chatgpt')">chat gpt</div>
+                        <div class="subsubmenu-item" onclick="showAlert('getcontact')">getcontact</div>
+                        <div class="subsubmenu-item" onclick="showAlert('applemusic')">apple music</div>
+                        <div class="subsubmenu-item" onclick="showAlert('spotify')">spotify</div>
+                        <div class="subsubmenu-item" onclick="showAlert('fizzo novel')">fizzo novel</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="menu-item" onclick="toggleSubMenu('sosmed-submenu', this)">
+            JASA SOSMED
+            <i class="fas fa-eye-slash"></i>
+        </div>
+        <div id="sosmed-submenu" class="submenu">
+            <div class="submenu-content">
+                <div class="submenu-item" onclick="showAlert('Youtube')">Youtube</div>
+                <div class="submenu-item" onclick="showAlert('Tiktok')">Tiktok</div>
+                <div class="submenu-item" onclick="showAlert('Instagram')">Instagram</div>
+                <div class="submenu-item" onclick="showAlert('Telegram')">Telegram</div>
+                <div class="submenu-item" onclick="showAlert('Facebook')">Facebook</div>
+            </div>
+        </div>
+        <div class="menu-item" onclick="toggleSubMenu('services-submenu', this)">
+            OTHER SERVICES
+            <i class="fas fa-eye-slash"></i>
+        </div>
+        <div id="services-submenu" class="submenu">
+            <div class="submenu-content">
+                <div class="submenu-item" onclick="showAlert('Jaspin')">Jaspin</div>
+                <div class="submenu-item" onclick="showAlert('Jasget')">Jasget</div>
+                <div class="submenu-item" onclick="showAlert('Teleprem')">Teleprem</div>
+            </div>
+        </div>
+    </div>
+    <div class="footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+
+        const menuItems = [
+            { name: 'APLIKASI PREMIUM', type: 'menu', id: 'premium-submenu' },
+            { name: 'Streaming App', type: 'submenu', parentId: 'premium-submenu', id: 'streaming-submenu' },
+            { name: 'Netflix', type: 'subsubmenu', parentId: 'streaming-submenu' },
+            { name: 'Disney', type: 'subsubmenu', parentId: 'streaming-submenu' },
+            { name: 'Bstation', type: 'subsubmenu', parentId: 'streaming-submenu' },
+            { name: 'viu', type: 'subsubmenu', parentId: 'streaming-submenu' },
+            { name: 'vidio', type: 'subsubmenu', parentId: 'streaming-submenu' },
+            { name: 'prime vidio', type: 'subsubmenu', parentId: 'streaming-submenu' },
+            { name: 'youtube', type: 'subsubmenu', parentId: 'streaming-submenu' },
+            { name: 'wetv', type: 'subsubmenu', parentId: 'streaming-submenu' },
+            { name: 'loklok', type: 'subsubmenu', parentId: 'streaming-submenu' },
+            { name: 'youku', type: 'subsubmenu', parentId: 'streaming-submenu' },
+            { name: 'vision', type: 'subsubmenu', parentId: 'streaming-submenu' },
+            { name: 'iqiyi', type: 'subsubmenu', parentId: 'streaming-submenu' },
+            { name: 'Editing App', type: 'submenu', parentId: 'premium-submenu', id: 'editing-submenu' },
+            { name: 'capcut', type: 'subsubmenu', parentId: 'editing-submenu' },
+            { name: 'alightmotion', type: 'subsubmenu', parentId: 'editing-submenu' },
+            { name: 'canva', type: 'subsubmenu', parentId: 'editing-submenu' },
+            { name: 'dazzcam', type: 'subsubmenu', parentId: 'editing-submenu' },
+            { name: 'oldroll', type: 'subsubmenu', parentId: 'editing-submenu' },
+            { name: 'remini', type: 'subsubmenu', parentId: 'editing-submenu' },
+            { name: 'lightroom', type: 'subsubmenu', parentId: 'editing-submenu' },
+            { name: 'meitu', type: 'subsubmenu', parentId: 'editing-submenu' },
+            { name: 'vsco', type: 'subsubmenu', parentId: 'editing-submenu' },
+            { name: 'polarr', type: 'subsubmenu', parentId: 'editing-submenu' },
+            { name: 'ibispaint', type: 'subsubmenu', parentId: 'editing-submenu' },
+            { name: 'Other App', type: 'submenu', parentId: 'premium-submenu', id: 'other-submenu' },
+            { name: 'chatgpt', type: 'subsubmenu', parentId: 'other-submenu' },
+            { name: 'getcontact', type: 'subsubmenu', parentId: 'other-subsubmenu' },
+            { name: 'applemusic', type: 'subsubmenu', parentId: 'other-subsubmenu' },
+            { name: 'spotify', type: 'subsubmenu', parentId: 'other-subsubmenu' },
+            { name: 'pizzo novel', type: 'subsubmenu', parentId: 'other-subsubmenu' },
+            { name: 'JASA SOSMED', type: 'menu', id: 'sosmed-submenu' },
+            { name: 'Youtube', type: 'submenu', parentId: 'sosmed-submenu' },
+            { name: 'Tiktok', type: 'submenu', parentId: 'sosmed-submenu' },
+            { name: 'Instagram', type: 'submenu', parentId: 'sosmed-submenu' },
+            { name: 'Telegram', type: 'menu', id: 'services-submenu' },
+           { name: 'Facebook', type: 'menu', id: 'services-submenu' }, 
+            { name: 'Service 1', type: 'submenu', parentId: 'services-submenu' },
+            { name: 'Service 2', type: 'submenu', parentId: 'services-submenu' },
+            { name: 'Other Service', type: 'submenu', parentId: 'services-submenu' }
+        ];
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            searchResults.innerHTML = '';
+            if (query) {
+                const filteredItems = menuItems.filter(item => item.name.toLowerCase().includes(query));
+                filteredItems.forEach(item => {
+                    const div = document.createElement('div');
+                    div.textContent = item.name;
+                    div.onclick = () => handleSearchResultClick(item);
+                    searchResults.appendChild(div);
+                });
+            }
+        });
+
+        function performSearch() {
+            const query = searchInput.value.toLowerCase();
+            const item = menuItems.find(item => item.name.toLowerCase() === query);
+            if (item) {
+                handleSearchResultClick(item);
+            }
+        }
+
+        function handleSearchResultClick(item) {
+            searchResults.innerHTML = '';
+            searchInput.value = '';
+            if (item.type === 'subsubmenu') {
+                showAlert(item.name);
+            } else if (item.type === 'submenu') {
+                const parentMenu = document.getElementById(item.parentId);
+                if (parentMenu) {
+                    parentMenu.classList.add('show');
+                    const parentMenuItem = parentMenu.previousElementSibling;
+                    if (parentMenuItem) {
+                        parentMenuItem.classList.add('active');
+                        parentMenuItem.querySelector('i').classList.remove('fa-eye-slash');
+                        parentMenuItem.querySelector('i').classList.add('fa-eye');
+                    }
+                }
+                const submenu = document.getElementById(item.id);
+                if (submenu) {
+                    submenu.classList.add('show');
+                    const submenuItem = submenu.previousElementSibling;
+                    if (submenuItem) {
+                        submenuItem.classList.add('highlight');
+                        setTimeout(() => submenuItem.classList.remove('highlight'), 2000);
+                    }
+                }
+            } else if (item.type === 'menu') {
+                const menu = document.getElementById(item.id);
+                if (menu) {
+                    menu.classList.add('show');
+                    const menuItem = menu.previousElementSibling;
+                    if (menuItem) {
+                        menuItem.classList.add('active');
+                        menuItem.querySelector('i').classList.remove('fa-eye-slash');
+                        menuItem.querySelector('i').classList.add('fa-eye');
+                        menuItem.classList.add('highlight');
+                        setTimeout(() => menuItem.classList.remove('highlight'), 2000);
+                    }
+                }
+            }
+        }
+
+        function toggleSubMenu(id, element) {
+            var submenu = document.getElementById(id);
+            var icon = element.querySelector('i');
+            if (submenu.classList.contains("show")) {
+                submenu.classList.remove("show");
+                element.classList.remove("active");
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            } else {
+                submenu.classList.add("show");
+                element.classList.add("active");
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            }
+        }
+        
+function showAlert(appName) {
+    const appPrices = prices[appName];
+
+    if (appPrices) {
+        let priceDetails = appPrices
+            .map(price => `<p>${price.duration}: ${price.profile} - ${price.price}</p>`)
+            .join("");
+
+        Swal.fire({
+            title: appName,
+            html: priceDetails,
+            icon: "info",
+            confirmButtonText: "OK",
+            customClass: {
+                popup: "swal2-popup",
+            },
+        });
+    } else {
+        Swal.fire({
+            title: appName,
+            text: "Harga tidak tersedia",
+            icon: "warning",
+            confirmButtonText: "OK",
+            customClass: {
+                popup: "swal2-popup",
+            },
+        });
+    }
+}
+
+const prices = {
+  Netflix: [
+    { duration: "1 hari", profile: "1 profile 2 user", price: "Rp 2.000" },
+    { duration: "1 hari", profile: "1 profile 1 user", price: "Rp 3.000" },
+    { duration: "2 hari", profile: "1 profile 1 user", price: "Rp 3.500" },
+    { duration: "3 hari", profile: "1 profile 1 user", price: "Rp 6.000" },
+    { duration: "1 minggu", profile: "1 profile 1 user", price: "Rp 12.000" },
+    { duration: "1 minggu", profile: "1 profile 2 user", price: "Rp 8.500" },
+    { duration: "1 bulan", profile: "1 profile 1 user", price: "Rp 30.000" },
+    { duration: "1 bulan", profile: "1 profile 2 user", price: "Rp 23.500" },
+    { duration: "1 bulan", profile: "semi private", price: "Rp 40.000" },
+    { duration: "1 bulan", profile: "private", price: "Rp 140.000" }
+  ],
+  Disney: [
+    { duration: "1 minggu", profile: "Disney sharing", price: "Rp 14.000" },
+    { duration: "1 bulan", profile: "Disney 6u", price: "Rp 25.000" },
+    { duration: "1 bulan", profile: "Disney 10u", price: "Rp 20.000" }
+  ],
+  youtube: [
+    { duration: "1 bulan", profile: "famplan", price: "Rp 4.000" },
+    { duration: "4 bulan", profile: "famplan", price: "Rp 15.000" },
+    { duration: "1 bulan", profile: "indplan", price: "Rp 10.000" },
+    { duration: "3 bulan", profile: "indplan (renew)", price: "Rp 22.000" },
+    { duration: "3 bulan", profile: "indplan (no renew)", price: "Rp 28.000" }
+  ],
+  viu: [
+    { duration: "1 bulan", profile: "private anti limit", price: "Rp 1.000" },
+    { duration: "3 bulan", profile: "private anti limit", price: "Rp 2.500" },
+    { duration: "1 tahun", profile: "private anti limit", price: "Rp 10.000" }
+  ],
+  vidio: [
+    { duration: "1 bulan", profile: "alldev 2 user", price: "Rp 17.000" },
+    { duration: "1 bulan", profile: "alldev private", price: "Rp 27.000" }
+  ],
+  vision: [
+    { duration: "1 bulan", profile: "vision + sport private", price: "Rp 23.500" },
+    { duration: "1 bulan", profile: "vision + sport sharing", price: "Rp 17.800" }
+  ],
+  primevidio: [
+    { duration: "1 bulan", profile: "prime video sharing", price: "Rp 5.300" },
+    { duration: "1 bulan", profile: "prime video private", price: "Rp 15.000" }
+  ],
+  wetv: [
+    { duration: "1 bulan", profile: "wetv sharing", price: "Rp 7.000" },
+    { duration: "1 bulan", profile: "wetv private", price: "Rp 32.000" }
+  ],
+  loklok: [
+    { duration: "1 bulan", profile: "sharing", price: "Rp 6.000" },
+    { duration: "1 tahun", profile: "sharing", price: "Rp 16.000" },
+    { duration: "1 bulan", profile: "private", price: "Rp 42.000" },
+    { duration: "1 tahun", profile: "private", price: "Rp 10.000.000" },
+    { duration: "3 bulan", profile: "sharing", price: "Rp 10.500" }
+  ],
+  iqiyi: [
+    { duration: "1 bulan", profile: "iqiyi sharing", price: "Rp 7.000" },
+    { duration: "1 tahun", profile: "iqiyi sharing", price: "Rp 15.000" }
+  ],
+  bstation: [
+    { duration: "1 bulan", profile: "bstation sharing", price: "Rp 5.000" },
+    { duration: "3 bulan", profile: "bstation sharing", price: "Rp 12.500" },
+    { duration: "1 tahun", profile: "bstation sharing", price: "Rp 20.000" }
+  ],
+  youku: [
+    { duration: "1 bulan", profile: "youku sharing", price: "Rp 7.000" },
+    { duration: "3 bulan", profile: "youku sharing", price: "Rp 15.000" }
+  ],
+  alightmotion: [
+    { duration: "1 tahun", profile: "alight motion sharing", price: "Rp 5.000" },
+    { duration: "1 tahun", profile: "alight motion private", price: "Rp 10.500" }
+  ],
+  capcut: [
+    { duration: "1 bulan", profile: "capcut sharing", price: "Rp 8.500" },
+    { duration: "1 tahun", profile: "capcut sharing", price: "Rp 15.000" }
+  ],
+  canva: [
+    { duration: "1 bulan", profile: "canva member", price: "Rp 1.000" },
+    { duration: "1 hari", profile: "canva member", price: "Rp 250" },
+    { duration: "1 tahun", profile: "canva member", price: "Rp 7.000" },
+    { duration: "lifetime", profile: "canva member edu", price: "Rp 10.000" },
+    { duration: "1 bulan", profile: "canva owner", price: "Rp 15.000" }
+  ],
+  ibispaint: [
+    { duration: "1 tahun", profile: "ibis paint x (ios/andro)", price: "Rp 23.000" }
+  ],
+  vsco: [
+    { duration: "1 tahun", profile: "vsco sharing", price: "Rp 12.000" }
+  ],
+  getcontact: [
+    { duration: "1 bulan", profile: "getcontact private", price: "Rp 11.000" }
+  ],
+  applemusic: [
+    { duration: "1 bulan", profile: "apple music imess", price: "Rp 7.800" }
+  ],
+  oldroll: [
+    { duration: "lifetime", profile: "oldroll (android)", price: "Rp 8.000" }
+  ],
+  dazzcam: [
+    { duration: "lifetime", profile: "dazzcam", price: "Rp 10.000" }
+  ],
+  polarr: [
+    { duration: "1 tahun", profile: "polarr sharing", price: "Rp 12.000" }
+  ],
+  chatgpt: [
+    { duration: "1 bulan", profile: "chatgpt sharing", price: "Rp 30.000" }
+  ],
+  remini: [
+    { duration: "1 tahun", profile: "remini pro (android)", price: "Rp 25.000" },
+    { duration: "1 bulan", profile: "remini pro (web)", price: "Rp 12.000" }
+  ],
+  spotify: [
+    { duration: "0 hari", profile: "harga kosong", price: "Rp 0,00" }
+  ],
+  meitu: [
+    { duration: "1 tahun", profile: "meitu sharing", price: "Rp 25.000" }
+  ],
+  lightroom: [
+    { duration: "1 tahun", profile: "lightroom sharing", price: "Rp 17.000" }
+  ],
+  fizzonovel: [
+    { duration: "1 bulan", profile: "fizzo novel", price: "Rp 12.000" }
+  ],
+  Youtube: [
+    { duration: "harga dan kuantitas", profile: "tanya di grup ress", price: "Rp 0,00" }
+ ],
+  Tiktok: [
+    { duration: "harga dan kuantitas", profile: "tanya di grup ress", price: "Rp 0,00" }
+  ],
+  Instagram: [
+    { duration: "harga dan kuantitas", profile: "tanya di grup ress", price: "Rp 0,00" }
+  ],
+  Telegram: [
+    { duration: "harga dan kuantitas", profile: "tanya di grup ress", price: "Rp 0,00" }
+  ],
+  Facebook: [
+    { duration: "harga dan kuantitas", profile: "tanya di grup ress", price: "Rp 0.00" }
+  ],
+  Teleprem: [
+    { duration: "1 bulan", profile: "full warranty vilog", price: "Rp 53.000" }
+  ],
+  Jaspin: [
+    { duration: "harga lengkap ", profile: "tanya di grup ress", price: "Rp 00.0" }
+  ],
+  Jasget: [
+    { duration: "harga lengkap", profile: "tanya di grup ress", price: "Rp 0.00" }
+  ],
+};
+
+
+        function goToPage() {
+            window.location.href = "index.html"; // Replace with the URL of the page you want to navigate to
+        }
+    </script>
+</body>
+</html>

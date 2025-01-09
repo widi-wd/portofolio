@@ -1,0 +1,249 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body dan HTML */
+body, html {
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4; /* Warna latar belakang halaman */
+}
+
+/* Kontainer Utama */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  justify-content: space-between;
+}
+
+/* Header Section */
+.header {
+  background-color: #27e7ec; /* Warna latar belakang header */
+  padding: 20px;
+  border-bottom-left-radius: 20px; /* Sudut kiri bawah melengkung */
+  border-bottom-right-radius: 20px; /* Sudut kanan bawah melengkung */
+  text-align: center;
+  position: relative;
+  height: 230px; /* Tinggi header */
+}
+
+/* Logo Circle */
+.logo-circle {
+  width: 100px; /* Ukuran lingkaran logo */
+  height: 100px;
+  background-color: #ccc; /* Warna latar belakang logo */
+  border-radius: 50%; /* Membuat lingkaran */
+  margin: 0 auto 10px; /* Posisi logo di tengah dengan margin bawah */
+  overflow: hidden; /* Memastikan gambar di dalamnya tidak keluar */
+}
+
+.logo-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Memastikan gambar memenuhi lingkaran tanpa distorsi */
+}
+
+/* Teks Selamat Datang */
+.welcome-text {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.welcome {
+  font-size: 16px; /* Ukuran font untuk teks 'Welcome' */
+  font-weight: normal;
+  color: #1a324a; /* Warna teks putih */
+}
+
+.reseller {
+  font-family: 'Anton', sans-serif;
+  font-size: 35px; /* Ukuran font untuk teks 'RESELLER WIDDZYY' */
+  color: #1a324a; /* Warna teks putih */
+}
+
+/* Image Slider */
+.image-slider {
+  margin: -55px auto 150px; /* Naikkan gambar 15px lebih tinggi dan memberi jarak di bawah */
+  width: 90%; /* Lebar gambar slider */
+  max-width: 400px; /* Lebar maksimal gambar */
+  aspect-ratio: 16/9; /* Menjaga rasio gambar 16:9 */
+  overflow: hidden;
+  position: relative;
+  border-radius: 15px; /* Sudut gambar tumpul */
+}
+
+.image-slider-container {
+  display: flex;
+  transition: transform 0.8s ease-in-out; /* Animasi transisi geser gambar */
+}
+
+.image-slider img {
+  width: 100%;
+  flex-shrink: 0;
+  object-fit: cover; /* Memastikan gambar memenuhi area tanpa distorsi */
+  border-radius: 15px; /* Sudut gambar tumpul */
+}
+/* Circle Icons */
+.circle-icons {
+  display: flex; /* Menggunakan flexbox untuk mengatur ikon dan teks */
+  justify-content: space-around; /* Mengatur jarak antar ikon dengan merata */
+  gap: 35px; /* Jarak antar ikon lebih renggang */
+  margin: -200px auto 150px; /* Mengangkat ikon 15px lebih tinggi dan memberi jarak di bawah gambar */
+}
+
+.icon-container {
+  display: flex; /* Menggunakan flexbox untuk mengatur ikon dan teks */
+  flex-direction: column; /* Mengatur konten secara vertikal */
+  align-items: center; /* Pusatkan konten secara horizontal */
+}
+
+.circle {
+  display: flex; /* Menggunakan flexbox untuk mengatur konten di dalamnya */
+  justify-content: center; /* Pusatkan gambar secara horizontal */
+  align-items: center; /* Pusatkan gambar secara vertikal */
+  width: 70px; /* Ukuran ikon lebih besar */
+  height: 70px; /* Pastikan tinggi sama dengan lebar untuk bentuk bulat */
+  background-color: transparent; /* Menghapus latar belakang */
+  border-radius: 50%; /* Membuat ikon berbentuk bulat */
+  overflow: hidden; /* Memastikan gambar tidak keluar dari lingkaran */
+}
+
+.circle img {
+  width: 100%;
+  height: 100%; /* Mengatur tinggi gambar agar memenuhi lingkaran */
+  object-fit: cover; /* Memastikan gambar di dalam ikon memenuhi tanpa distorsi */
+}
+
+/* Teks di bawah ikon */
+.icon-text {
+  text-align: center; /* Pusatkan teks */
+  font-size: 14px; /* Ukuran font untuk teks ikon */
+  color: #1a324a; /* Warna teks */
+  margin-top: 5px; /* Jarak antara ikon dan teks */
+}
+
+/* Tab Bar */
+.tab-bar {
+  display: flex;
+  justify-content: space-around; /* Mengatur tombol tab secara merata */
+  background-color: #27e7ec; /* Warna latar belakang tab bar */
+  padding: 15px 0; /* Padding di atas dan bawah */
+  border-radius: 15px; /* Sudut tab bar melengkung */
+  margin: 0 10px 10px; /* Margin sekitar tab bar */
+}
+
+.tab-bar .tab {
+  display: flex; /* Menggunakan flexbox untuk mengatur konten di dalamnya */
+  flex-direction: column; /* Mengatur konten secara vertikal */
+  align-items: center; /* Pusatkan konten secara horizontal */
+  border: none;
+  background: none;
+  color: #1a324a; /* Warna ikon dan teks tab */
+  font-size: 24px; /* Ukuran font untuk ikon tab */
+  cursor: pointer; /* Kursor menjadi pointer saat hover */
+}
+
+.tab-bar .tab:focus {
+  outline: none; /* Menghilangkan outline saat tab dipilih */
+}
+
+/* Teks di bawah tab */
+.tab-text {
+  text-align: center; /* Pusatkan teks */
+  font-size: 12px; /* Ukuran font untuk teks tab */
+  color: #1a324a; /* Warna teks */
+  margin-top: 5px; /* Jarak antara ikon dan teks */
+}
+
+
+/* Tab Bar */
+.tab-bar {
+  display: flex;
+  justify-content: space-around; /* Mengatur tombol tab secara merata */
+  background-color: #27e7ec; /* Warna latar belakang tab bar */
+  padding: 15px 0; /* Padding di atas dan bawah */
+  border-radius: 15px; /* Sudut tab bar melengkung */
+  margin: 0 10px 10px; /* Margin sekitar tab bar */
+}
+
+.tab-bar .tab {
+  border: none;
+  background: none;
+  color: #1a324a; /* Warna ikon dan teks tab */
+  font-size: 24px; /* Ukuran font untuk ikon tab */
+  cursor: pointer; /* Kursor menjadi pointer saat hover */
+}
+
+.tab-bar .tab:focus {
+  outline: none; /* Menghilangkan outline saat tab dipilih */
+}
+
+/* Gaya untuk mode gelap */
+body.dark-mode {
+  background-color: #1a1a1a; /* Warna latar belakang gelap */
+}
+
+/* Tab Bar */
+body.dark-mode .tab-bar {
+  background-color: #27e7ec; /* Warna latar belakang tab bar gelap */
+}
+
+/* Tab */
+body.dark-mode .tab {
+  color: #1a324a; /* Warna ikon dan teks tab tetap */
+}
+
+/* Circle Icons */
+body.dark-mode .circle {
+  background-color: #444; /* Warna latar belakang ikon gelap */
+}
+
+/* Teks di bawah ikon */
+body.dark-mode .icon-text {
+  color: #ffffff; /* Warna teks ikon menjadi putih */
+}
+
+/* Efek bersinar pada ikon */
+body.dark-mode .circle img {
+  filter: brightness(1.5); /* Meningkatkan kecerahan ikon */
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7); /* Efek bersinar */
+}
+
+/* Gambar dalam slider */
+body.dark-mode .image-slider img {
+  filter: brightness(1); /* Tidak ada perubahan pada gambar */
+}
+
+/* Gaya untuk bagian atas */
+body.dark-mode .header {
+  background-color: #27e7ec; /* Warna latar belakang header gelap */
+}
+
+/* Gaya untuk toggle button */
+.toggle-container {
+  position: absolute; /* Menggunakan posisi absolut */
+  top: 20px; /* Jarak dari atas */
+  right: 20px; /* Jarak dari kanan */
+  z-index: 1000; /* Pastikan tombol di atas elemen lain */
+}
+
+#toggle-mode {
+  background-color: #27e7ec; /* Warna latar belakang tombol */
+  color: #1a324a; /* Warna teks tombol */
+  border: none; /* Menghilangkan border */
+  padding: 10px; /* Padding untuk tombol */
+  border-radius: 5px; /* Sudut melengkung */
+  cursor: pointer; /* Kursor menjadi pointer saat hover */
+  font-size: 24px; /* Ukuran font untuk tombol */
+}
+
+#toggle-mode:hover {
+  background-color: #1a324a; /* Warna latar belakang saat hover */
+  color: #fff; /* Warna teks saat hover */
+}
